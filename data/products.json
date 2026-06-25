@@ -1,0 +1,108 @@
+[
+  {
+    "sku": "SKSFD4826P",
+    "brand": "Signature Kitchen Suite",
+    "productName": "48 Inch Built-In French Door Refrigerator",
+    "category": "Refrigeration",
+    "subcategory": "Built-In Refrigerators",
+    "description": "Panel-ready built-in refrigeration with precise temperature control for luxury kitchens.",
+    "specs": {
+      "capacity": "26 cu. ft.",
+      "zones": "Dual evaporators",
+      "controls": "Wi-Fi enabled"
+    },
+    "dimensions": {
+      "width": 48,
+      "height": 83.5,
+      "depth": 24
+    },
+    "finish": "Panel Ready",
+    "fuelType": "",
+    "installationType": "Built-In",
+    "panelReady": true,
+    "price": 11499,
+    "salePrice": null,
+    "requestPricing": true,
+    "visible": true,
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1400&q=80"
+    ],
+    "pdfLinks": [
+      "https://example.com/manuals/sksfd4826p-spec-sheet.pdf"
+    ],
+    "internal": {
+      "builderPrice": 9875
+    },
+    "updatedAt": "2026-06-25T00:00:00.000Z"
+  },
+  {
+    "sku": "MON-GRP366",
+    "brand": "Monogram",
+    "productName": "36 Inch Professional Gas Range",
+    "category": "Cooking",
+    "subcategory": "Ranges",
+    "description": "A professional-style gas range with brass burners, continuous grates, and refined stainless detailing.",
+    "specs": {
+      "burners": "6 sealed dual-flame burners",
+      "oven": "Convection",
+      "controls": "LED task lighting"
+    },
+    "dimensions": {
+      "width": 36,
+      "height": 35.25,
+      "depth": 28.25
+    },
+    "finish": "Stainless Steel",
+    "fuelType": "Gas",
+    "installationType": "Freestanding",
+    "panelReady": false,
+    "price": 8799,
+    "salePrice": 8299,
+    "requestPricing": false,
+    "visible": true,
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1400&q=80"
+    ],
+    "pdfLinks": [
+      "https://example.com/manuals/mon-grp366-install-guide.pdf"
+    ],
+    "internal": {
+      "builderPrice": 7525
+    },
+    "updatedAt": "2026-06-25T00:00:00.000Z"
+  },
+  {
+    "sku": "ASKO-DBI786IXXL",
+    "brand": "ASKO",
+    "productName": "40 Series Panel-Ready Dishwasher",
+    "category": "Dishwashers",
+    "subcategory": "Built-In Dishwashers",
+    "description": "Quiet, flexible dish care with a panel-ready front for integrated kitchen design.",
+    "specs": {
+      "racks": "3 flexible racks",
+      "noise": "39 dBA",
+      "programs": "16 wash programs"
+    },
+    "dimensions": {
+      "width": 24,
+      "height": 35.75,
+      "depth": 22
+    },
+    "finish": "Panel Ready",
+    "fuelType": "",
+    "installationType": "Built-In",
+    "panelReady": true,
+    "price": 2299,
+    "salePrice": null,
+    "requestPricing": false,
+    "visible": true,
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1400&q=80"
+    ],
+    "pdfLinks": [],
+    "internal": {
+      "builderPrice": 1875
+    },
+    "updatedAt": "2026-06-25T00:00:00.000Z"
+  }
+]
