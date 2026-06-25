@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore premium appliance categories, brands, finishes, widths, and installation options with KWA Appliances.">
+    <title>Appliance Catalogue | KWA Appliances</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script defer src="/app.js"></script>
+  </head>
+  <body data-page="catalogue">
+    <header class="site-header">
+      <a class="brand-mark" href="/">KWA Appliances</a>
+      <nav aria-label="Main navigation">
+        <a href="/#why-kwa">Why KWA</a>
+        <a href="/#process">Process</a>
+        <a href="/#trade">Builders & Designers</a>
+        <a href="/catalogue.html">Catalogue</a>
+        <a href="/admin.html">CSV Import</a>
+      </nav>
+    </header>
+
+    <main class="catalogue-shell">
+      <section class="page-heading catalogue-intro">
+        <p class="eyebrow">Product catalogue</p>
+        <h1>Explore appliances with the project in mind.</h1>
+        <p>Browse by category, brand, width, finish, fuel type, installation, and panel-ready requirements. For custom homes and renovations, the catalogue is a starting point for expert planning, not a substitute for it.</p>
+      </section>
+
+      <section class="catalogue-layout">
+        <aside class="filters" aria-label="Catalogue filters">
+          <label>Search<input id="q" type="search" placeholder="Brand, SKU, product"></label>
+          <label>Category<select id="category"></select></label>
+          <label>Brand<select id="brand"></select></label>
+          <label>Width<select id="width"></select></label>
+          <label>Finish<select id="finish"></select></label>
+          <label>Fuel Type<select id="fuelType"></select></label>
+          <label>Installation<select id="installationType"></select></label>
+          <label>Panel-Ready<select id="panelReady"><option value="">Any</option><option value="true">Yes</option><option value="false">No</option></select></label>
+          <div class="price-row"><label>Min Price<input id="minPrice" type="number" min="0" step="100"></label><label>Max Price<input id="maxPrice" type="number" min="0" step="100"></label></div>
+          <button class="button dark" id="applyFilters" type="button">Apply Filters</button>
+          <p class="filter-note">Pricing is shown only where appropriate. Some premium products require advisor-assisted pricing.</p>
+        </aside>
+
+        <section>
+          <div class="result-bar"><span id="resultCount">Loading products</span><a href="/admin.html">Update by CSV</a></div>
+          <div class="product-grid" id="productGrid"></div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
