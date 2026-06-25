@@ -1,0 +1,14 @@
+{
+  "name": "kwa-appliances-import-system",
+  "version": "1.0.0",
+  "description": "KWA Appliances product catalogue and CSV import system.",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "smoke": "node work/smoke-test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
