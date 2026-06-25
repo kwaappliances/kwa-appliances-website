@@ -1,0 +1,137 @@
+const fields = ["q", "category", "brand", "width", "finish", "fuelType", "installationType", "panelReady", "minPrice", "maxPrice"];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const page = document.body.dataset.page;
+  if (page === "catalogue") initCatalogue();
+  if (page === "product") initProduct();
+  if (page === "admin") initAdmin();
+});
+
+async function initCatalogue() {
+  const params = new URLSearchParams(location.search);
+  fields.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el && params.has(id)) el.value = params.get(id);
+  });
+  document.getElementById("applyFilters").addEventListener("click", () => {
+    const next = new URLSearchParams();
+    fields.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el && el.value) next.set(id, el.value);
+    });
+    history.replaceState({}, "", location.pathname + "?" + next.toString());
+    loadProducts(next);
+  });
+  await loadProducts(params);
+}
+
+async function loadProducts(params) {
+  const response = await fetch("/api/products?" + params.toString());
+  const payload = await response.json();
+  populateFilters(payload.facets);
+  renderProducts(payload.products);
+}
+
+function populateFilters(facets) {
+  select("category", facets.categories, "All categories");
+  select("brand", facets.brands, "All brands");
+  select("width", facets.widths, "Any width", (value) => value + " in.");
+  select("finish", facets.finishes, "Any finish");
+  select("fuelType", facets.fuelTypes, "Any fuel");
+  select("installationType", facets.installationTypes, "Any installation");
+}
+
+function select(id, values, label, format) {
+  const el = document.getElementById(id);
+  if (!el || el.options.length > 1) return;
+  const current = el.value;
+  el.innerHTML = '<option value="">' + label + '</option>';
+  (values || []).forEach((value) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = (format || String)(value);
+    el.appendChild(option);
+  });
+  el.value = current;
+}
+
+function renderProducts(products) {
+  const grid = document.getElementById("productGrid");
+  document.getElementById("resultCount").textContent = products.length + " product" + (products.length === 1 ? "" : "s");
+  if (!products.length) {
+    grid.innerHTML = '<p class="meta">No products match the selected filters.</p>';
+    return;
+  }
+  grid.innerHTML = products.map((p) =>
+    '<a class="product-card" href="/product.html?sku=' + encodeURIComponent(p.sku) + '">' +
+      '<img src="' + esc((p.imageUrls || [])[0] || "") + '" alt="' + esc(p.productName) + '">' +
+      '<div class="product-card-body">' +
+        '<div class="meta">' + esc(p.brand) + ' · ' + esc(p.category) + '</div>' +
+        '<h3>' + esc(p.productName) + '</h3>' +
+        '<div class="badge-row">' +
+          (p.dimensions && p.dimensions.width ? '<span class="badge">' + p.dimensions.width + ' in.</span>' : '') +
+          (p.finish ? '<span class="badge">' + esc(p.finish) + '</span>' : '') +
+          (p.panelReady ? '<span class="badge">Panel-ready</span>' : '') +
+        '</div>' +
+        '<div class="price">' + esc(p.priceLabel) + '</div><div class="advisor-note">Advisor-assisted planning available</div>' +
+      '</div>' +
+    '</a>'
+  ).join("");
+}
+
+async function initProduct() {
+  const sku = new URLSearchParams(location.search).get("sku");
+  const target = document.getElementById("productDetail");
+  if (!sku) {
+    target.textContent = "Missing product SKU.";
+    return;
+  }
+  const response = await fetch("/api/products/" + encodeURIComponent(sku));
+  if (!response.ok) {
+    target.textContent = "Product not found.";
+    return;
+  }
+  const data = await response.json();
+  const p = data.product;
+  document.title = p.productName + " | KWA Appliances";
+  target.innerHTML =
+    '<section class="detail-grid">' +
+      '<div class="product-media">' +
+        ((p.imageUrls && p.imageUrls.length ? p.imageUrls : [""]).map((url) => '<img src="' + esc(url) + '" alt="' + esc(p.productName) + '">').join("")) +
+      '</div>' +
+      '<article class="product-copy">' +
+        '<p class="eyebrow">' + esc(p.brand) + ' · ' + esc(p.sku) + '</p>' +
+        '<h1>' + esc(p.productName) + '</h1>' +
+        '<p>' + esc(p.description) + '</p>' +
+        '<div class="price">' + esc(p.priceLabel) + '</div><p class="advisor-note">Ask a KWA advisor to confirm fit, specifications, installation requirements, and package options for your project.</p>' +
+        '<div class="badge-row"><span class="badge">' + esc(p.category) + '</span>' +
+          (p.subcategory ? '<span class="badge">' + esc(p.subcategory) + '</span>' : '') +
+          (p.finish ? '<span class="badge">' + esc(p.finish) + '</span>' : '') +
+          (p.panelReady ? '<span class="badge">Panel-ready</span>' : '') +
+        '</div>' +
+        specs(p) + downloads(p) +
+      '</article>' +
+    '</section>';
+}
+
+function specs(p) {
+  const rows = [["Width", p.dimensions && p.dimensions.width ? p.dimensions.width + " in." : ""], ["Height", p.dimensions && p.dimensions.height ? p.dimensions.height + " in." : ""], ["Depth", p.dimensions && p.dimensions.depth ? p.dimensions.depth + " in." : ""], ["Fuel Type", p.fuelType], ["Installation", p.installationType]].concat(Object.entries(p.specs || {})).filter((row) => row[1]);
+  return '<div class="spec-table">' + rows.map((row) => '<div class="spec-row"><strong>' + esc(row[0]) + '</strong><span>' + esc(row[1]) + '</span></div>').join("") + '</div>';
+}
+
+function downloads(p) {
+  if (!p.pdfLinks || !p.pdfLinks.length) return "";
+  return '<div class="hero-actions">' + p.pdfLinks.map((link, index) => '<a class="button dark" href="' + esc(link) + '" target="_blank" rel="noreferrer">Download PDF ' + (index + 1) + '</a>').join("") + '</div>';
+}
+
+function initAdmin() {
+  const params = new URLSearchParams(location.search);
+  if (!params.has("created") && !params.has("updated")) return;
+  const result = document.getElementById("importResult");
+  result.hidden = false;
+  result.innerHTML = '<h2>Import complete</h2><p>' + (params.get("created") || 0) + ' created, ' + (params.get("updated") || 0) + ' updated, ' + (params.get("skipped") || 0) + ' skipped.</p>';
+}
+
+function esc(value) {
+  return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
