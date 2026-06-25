@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSV Import | KWA Appliances</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script defer src="/app.js"></script>
+  </head>
+  <body data-page="admin">
+    <header class="site-header">
+      <a class="brand-mark" href="/">KWA Appliances</a>
+      <nav aria-label="Main navigation">
+        <a href="/#why-kwa">Why KWA</a>
+        <a href="/#process">Process</a>
+        <a href="/#trade">Builders & Designers</a>
+        <a href="/catalogue.html">Catalogue</a>
+        <a href="/admin.html">CSV Import</a>
+      </nav>
+    </header>
+
+    <main class="admin-shell">
+      <section class="page-heading">
+        <p class="eyebrow">Catalogue operations</p>
+        <h1>Product CSV Import</h1>
+        <p>Upload product data that supports KWA’s advisory sales process: accurate specs, dimensions, imagery, manuals, visibility, and pricing controls by SKU.</p>
+      </section>
+
+      <section class="admin-panel">
+        <form action="/admin/import" method="post" enctype="multipart/form-data">
+          <label>Product CSV<input type="file" name="csvFile" accept=".csv,text/csv" required></label>
+          <button class="button primary" type="submit">Upload CSV</button>
+        </form>
+        <div class="admin-actions">
+          <a class="button secondary admin-secondary" href="/templates/kwa-product-import-template.csv">Download CSV Template</a>
+          <a class="button secondary admin-secondary" href="/admin-import-guide.md">Read Admin Guide</a>
+        </div>
+      </section>
+
+      <section class="import-result" id="importResult" hidden></section>
+
+      <section class="admin-notes">
+        <h2>Import priorities</h2>
+        <p>Every product record should help a client or advisor answer: will this appliance fit the design, the installation, and the way the household uses the kitchen?</p>
+        <p>Builder pricing may be included for internal records only. It is never returned by public catalogue endpoints and never shown on customer-facing product pages.</p>
+      </section>
+    </main>
+  </body>
+</html>
