@@ -352,13 +352,14 @@ p { margin: 0; }
   filter: grayscale(0);
   transform: translateY(-4px) scale(1.02);
 }
-.brand-logo-placeholder {
-  color: var(--black);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.35rem, 2.2vw, 2.2rem);
-  line-height: 1;
+.brand-logo-card img {
+  display: block;
+  max-height: 78px;
+  max-width: min(220px, 86%);
+  object-fit: contain;
+  transition: transform 200ms ease;
 }
-.brand-logo-card:hover .brand-logo-placeholder { color: var(--brass-dark); }
+.brand-logo-card:hover img { transform: scale(1.03); }
 
 .process-luxury { background: var(--charcoal); color: var(--white); }
 .process-luxury .section-heading p:not(.eyebrow) { color: rgba(255, 255, 255, 0.68); }
