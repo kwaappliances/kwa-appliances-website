@@ -348,18 +348,16 @@ p { margin: 0; }
   background: var(--warm-white);
   border: 1px solid var(--line);
   display: flex;
-  filter: grayscale(1);
   justify-content: center;
   min-height: 148px;
   padding: 28px;
   text-align: center;
-  transition: background 200ms ease, border-color 200ms ease, filter 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
 }
 .brand-logo-card:hover {
   background: var(--white);
   border-color: rgba(167, 122, 63, 0.38);
   box-shadow: var(--shadow);
-  filter: grayscale(0);
   transform: translateY(-4px) scale(1.02);
 }
 .brand-logo-card img {
