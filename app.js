@@ -1,11 +1,35 @@
 const fields = ["q", "category", "brand", "width", "finish", "fuelType", "installationType", "panelReady", "minPrice", "maxPrice"];
 
 document.addEventListener("DOMContentLoaded", () => {
+  initHomeNavigation();
   const page = document.body.dataset.page;
   if (page === "catalogue") initCatalogue();
   if (page === "product") initProduct();
   if (page === "admin") initAdmin();
 });
+
+function initHomeNavigation() {
+  const header = document.querySelector(".site-header");
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector("#primary-nav");
+  if (!header) return;
+  const setScrolled = () => header.classList.toggle("is-scrolled", window.scrollY > 24);
+  setScrolled();
+  window.addEventListener("scroll", setScrolled, { passive: true });
+  if (!toggle || !nav) return;
+  toggle.addEventListener("click", () => {
+    const open = document.body.classList.toggle("nav-open");
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  nav.addEventListener("click", (event) => {
+    if (event.target.closest("a")) {
+      document.body.classList.remove("nav-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
+    }
+  });
+}
 
 async function initCatalogue() {
   const params = new URLSearchParams(location.search);

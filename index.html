@@ -9,8 +9,11 @@
   </head>
   <body class="home-page">
     <header class="site-header luxury-nav">
-      <a class="brand-mark" href="" aria-label="KWA Appliances home">KWA Appliances</a>
-      <nav aria-label="Main navigation">
+      <a class="brand-mark" href="" aria-label="KWA Appliances home" aria-current="page">KWA Appliances</a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-nav" aria-label="Main navigation">
         <a href="brands">Brands</a>
         <a href="builders">Builders</a>
         <a href="designers">Designers</a>
@@ -32,6 +35,7 @@
             <a class="button primary" href="contact">Book a Consultation</a>
           </div>
         </div>
+        <a class="scroll-indicator" href="#why-kwa" aria-label="Scroll to Why KWA"><span></span></a>
       </section>
 
       <section class="intro-statement" aria-label="KWA positioning">
@@ -49,10 +53,10 @@
           </div>
         </div>
         <div class="feature-grid four-up">
-          <article><span>01</span><h3>One Dedicated Advisor</h3><p>Work with a single point of contact who understands your plans, priorities, timeline, and appliance package.</p></article>
-          <article><span>02</span><h3>Planning Before Delivery</h3><p>We help clarify dimensions, finishes, installation requirements, and product fit before decisions become costly.</p></article>
-          <article><span>03</span><h3>Premium Appliance Expertise</h3><p>Our team helps compare leading luxury brands through the lens of performance, design, and long-term use.</p></article>
-          <article><span>04</span><h3>Support That Continues</h3><p>The relationship does not end at delivery. We remain available for questions, coordination, and next steps.</p></article>
+          <article><svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M15 36V18a9 9 0 0 1 18 0v18"/><path d="M10 36h28"/><path d="M18 22h12"/></svg><span>01</span><h3>One Dedicated Advisor</h3><p>Work with a single point of contact who understands your plans, priorities, timeline, and appliance package.</p></article>
+          <article><svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 34h24"/><path d="M15 28l9-16 9 16"/><path d="M20 28h8"/><path d="M24 12v24"/></svg><span>02</span><h3>Planning Before Delivery</h3><p>We help clarify dimensions, finishes, installation requirements, and product fit before decisions become costly.</p></article>
+          <article><svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 34h20V14H14z"/><path d="M19 19h10"/><path d="M19 25h10"/><path d="M19 31h6"/></svg><span>03</span><h3>Premium Appliance Expertise</h3><p>Our team helps compare leading luxury brands through the lens of performance, design, and long-term use.</p></article>
+          <article><svg class="feature-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 18a11 11 0 0 1 22 0v8"/><path d="M13 26v4a6 6 0 0 0 6 6h3"/><path d="M35 26v4a6 6 0 0 1-6 6h-3"/><path d="M10 26h6v-8h-6z"/><path d="M32 26h6v-8h-6z"/></svg><span>04</span><h3>Support That Continues</h3><p>The relationship does not end at delivery. We remain available for questions, coordination, and next steps.</p></article>
         </div>
       </section>
 
@@ -78,8 +82,16 @@
           <p class="eyebrow">Premium brands</p>
           <h2 id="brand-title">Specified with care. Selected with context.</h2>
         </div>
-        <div class="brand-grid" aria-label="Premium appliance brands">
-          <a href="brands/sub-zero">Sub-Zero</a><a href="brands/wolf">Wolf</a><a href="brands/thermador">Thermador</a><a href="brands/bosch">Bosch</a><a href="brands/kitchenaid">KitchenAid</a><a href="brands/ge-cafe">GE Cafe</a><a href="brands/hestan">Hestan</a><a href="brands/steel-cucine">Steel Cucine</a><a href="brands/elica">Elica</a>
+        <div class="brand-grid logo-grid" aria-label="Premium appliance brands">
+          <a class="brand-logo-card brand-sub-zero" href="brands/sub-zero" aria-label="Sub-Zero"><span class="brand-logo-placeholder">Sub-Zero</span></a>
+          <a class="brand-logo-card brand-wolf" href="brands/wolf" aria-label="Wolf"><span class="brand-logo-placeholder">Wolf</span></a>
+          <a class="brand-logo-card brand-thermador" href="brands/thermador" aria-label="Thermador"><span class="brand-logo-placeholder">Thermador</span></a>
+          <a class="brand-logo-card brand-bosch" href="brands/bosch" aria-label="Bosch"><span class="brand-logo-placeholder">Bosch</span></a>
+          <a class="brand-logo-card brand-kitchenaid" href="brands/kitchenaid" aria-label="KitchenAid"><span class="brand-logo-placeholder">KitchenAid</span></a>
+          <a class="brand-logo-card brand-ge-cafe" href="brands/ge-cafe" aria-label="GE Cafe"><span class="brand-logo-placeholder">GE Cafe</span></a>
+          <a class="brand-logo-card brand-hestan" href="brands/hestan" aria-label="Hestan"><span class="brand-logo-placeholder">Hestan</span></a>
+          <a class="brand-logo-card brand-steel-cucine" href="brands/steel-cucine" aria-label="Steel Cucine"><span class="brand-logo-placeholder">Steel Cucine</span></a>
+          <a class="brand-logo-card brand-elica" href="brands/elica" aria-label="Elica"><span class="brand-logo-placeholder">Elica</span></a>
         </div>
       </section>
 
@@ -97,9 +109,26 @@
         </ol>
       </section>
 
-      <section class="editorial-band projects-band" aria-labelledby="projects-title">
-        <div><p class="eyebrow">Featured projects</p><h2 id="projects-title">Real kitchens. Real coordination. Real proof.</h2><p>Project stories will showcase completed kitchens, builder collaborations, designer details, and the appliance decisions behind them.</p></div>
-        <a class="button dark" href="projects">View Projects</a>
+      <section class="projects-section" aria-labelledby="projects-title">
+        <div class="section-heading centered">
+          <p class="eyebrow">Featured projects</p>
+          <h2 id="projects-title">Real kitchens. Real coordination. Real proof.</h2>
+          <p>Project stories will showcase completed kitchens, builder collaborations, designer details, and the appliance decisions behind them.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <img src="images/tudor-revival-kitchen.jpg" alt="Tudor revival luxury kitchen with integrated premium appliances">
+            <div class="project-card-body"><p class="project-location">Toronto, Ontario</p><h3>Tudor Revival Kitchen</h3><p>A refined appliance package coordinated around heritage architecture, polished refrigeration, and brass details.</p><a class="button secondary" href="projects/tudor-revival-kitchen">View Project</a></div>
+          </article>
+          <article class="project-card">
+            <img src="images/kwa-trust-kitchen.jpg" alt="Bright custom kitchen with wood ceiling and premium range">
+            <div class="project-card-body"><p class="project-location">Oakville, Ontario</p><h3>Warm Modern Family Kitchen</h3><p>A bright custom kitchen planned around everyday cooking, entertaining, and a cohesive premium appliance suite.</p><a class="button secondary" href="projects/warm-modern-family-kitchen">View Project</a></div>
+          </article>
+          <article class="project-card">
+            <img src="images/kwa-guidance-kitchen.jpg" alt="Integrated refrigeration and wine storage in a luxury kitchen">
+            <div class="project-card-body"><p class="project-location">King City, Ontario</p><h3>Integrated Refrigeration Wall</h3><p>A tailored refrigeration and wine storage wall designed to support hosting, preservation, and a clean architectural look.</p><a class="button secondary" href="projects/integrated-refrigeration-wall">View Project</a></div>
+          </article>
+        </div>
       </section>
 
       <section class="learning-preview" aria-labelledby="learning-title">
