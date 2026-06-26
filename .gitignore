@@ -1,6 +1,0 @@
-node_modules/
-work/*
-!work/smoke-test.js
-.vercel/
-.env
-.env.*
