@@ -354,8 +354,8 @@ p { margin: 0; }
   border: 1px solid var(--line);
   display: flex;
   justify-content: center;
-  min-height: 148px;
-  padding: 28px;
+  min-height: 168px;
+  padding: 18px;
   text-align: center;
   transition: background 200ms ease, border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
 }
@@ -367,8 +367,8 @@ p { margin: 0; }
 }
 .brand-logo-card img {
   display: block;
-  max-height: 78px;
-  max-width: min(220px, 86%);
+  max-height: 122px;
+  max-width: min(300px, 94%);
   object-fit: contain;
   transition: transform 200ms ease;
 }
@@ -578,6 +578,8 @@ input, select { background: #fbfaf7; border: 1px solid var(--line); border-radiu
   .section-shell, .audience-section, .brand-section, .process-luxury, .learning-preview, .about-story, .editorial-band, .final-cta { padding-left: 5vw; padding-right: 5vw; }
 }
 @media (max-width: 520px) {
+  .brand-logo-card { min-height: 138px; padding: 16px; }
+  .brand-logo-card img { max-height: 96px; max-width: 94%; }
   h1 { font-size: clamp(3.5rem, 14vw, 7rem); line-height: 0.95; max-width: 100%; }
   .button { width: 100%; }
   .hero-actions { width: 100%; }
