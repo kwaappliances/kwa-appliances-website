@@ -161,6 +161,12 @@ function esc(value) {
   return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
+function sitePath(path) {
+  if (!path || !path.startsWith('/')) return path;
+  const base = location.pathname.startsWith('/kwa-appliances-website/') ? '/kwa-appliances-website' : '';
+  return base + path;
+}
+
 async function initPromotionsCarousel() {
   const track = document.querySelector("[data-promotions-track]");
   const carousel = document.querySelector("[data-promotions-carousel]");
@@ -195,7 +201,7 @@ async function initPromotionsCarousel() {
     const media = document.createElement("div");
     media.className = "promotion-media";
     const img = document.createElement("img");
-    img.src = promotion.image;
+    img.src = sitePath(promotion.image);
     img.alt = promotion.brand + " promotion";
     media.append(img);
     const copy = document.createElement("div");
@@ -212,7 +218,7 @@ async function initPromotionsCarousel() {
     date.textContent = "Available through " + formatDate(promotion.endDate);
     const link = document.createElement("a");
     link.className = "button secondary";
-    link.href = promotion.link;
+    link.href = sitePath(promotion.link);
     link.textContent = "View Promotion";
     copy.append(brand, title, description, date, link);
     card.append(media, copy);
