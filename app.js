@@ -2,6 +2,7 @@ const fields = ["q", "category", "brand", "width", "finish", "fuelType", "instal
 
 document.addEventListener("DOMContentLoaded", () => {
   initHomeNavigation();
+  initPromotionsCarousel();
   const page = document.body.dataset.page;
   if (page === "catalogue") initCatalogue();
   if (page === "product") initProduct();
@@ -158,4 +159,102 @@ function initAdmin() {
 
 function esc(value) {
   return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+async function initPromotionsCarousel() {
+  const track = document.querySelector("[data-promotions-track]");
+  const carousel = document.querySelector("[data-promotions-carousel]");
+  const dots = document.querySelector("[data-promotion-dots]");
+  if (!track || !carousel || !dots) return;
+
+  let promotions = [];
+  try {
+    const response = await fetch("data/promotions.json", { cache: "no-store" });
+    promotions = await response.json();
+  } catch (error) {
+    carousel.closest(".promotions-section")?.remove();
+    return;
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const activePromotions = promotions.filter((promotion) => {
+    if (!promotion.active) return false;
+    const starts = promotion.startDate ? new Date(promotion.startDate + "T00:00:00") : null;
+    const ends = promotion.endDate ? new Date(promotion.endDate + "T23:59:59") : null;
+    return (!starts || starts <= today) && (!ends || ends >= today);
+  });
+
+  if (!activePromotions.length) {
+    carousel.closest(".promotions-section")?.remove();
+    return;
+  }
+
+  const formatDate = (dateText) => {
+    if (!dateText) return "Limited time";
+    const date = new Date(dateText + "T00:00:00");
+    return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+  };
+
+  activePromotions.forEach((promotion) => {
+    const card = document.createElement("article");
+    card.className = "promotion-card";
+    const media = document.createElement("div");
+    media.className = "promotion-media";
+    const img = document.createElement("img");
+    img.src = promotion.image;
+    img.alt = promotion.brand + " promotion";
+    media.append(img);
+    const copy = document.createElement("div");
+    copy.className = "promotion-copy";
+    const brand = document.createElement("p");
+    brand.className = "project-location";
+    brand.textContent = promotion.brand;
+    const title = document.createElement("h3");
+    title.textContent = promotion.title;
+    const description = document.createElement("p");
+    description.textContent = promotion.description;
+    const date = document.createElement("p");
+    date.className = "promotion-date";
+    date.textContent = "Available through " + formatDate(promotion.endDate);
+    const link = document.createElement("a");
+    link.className = "button secondary";
+    link.href = promotion.link;
+    link.textContent = "View Promotion";
+    copy.append(brand, title, description, date, link);
+    card.append(media, copy);
+    track.append(card);
+  });
+
+  activePromotions.forEach((promotion, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", "Go to " + promotion.brand + " promotion");
+    dot.dataset.promoDot = String(index);
+    dots.append(dot);
+  });
+
+  const cards = Array.from(track.querySelectorAll(".promotion-card"));
+  const dotButtons = Array.from(dots.querySelectorAll("button"));
+  const setActiveDot = () => {
+    const left = track.scrollLeft;
+    const index = cards.reduce((best, card, current) => {
+      const distance = Math.abs(card.offsetLeft - left);
+      return distance < best.distance ? { index: current, distance } : best;
+    }, { index: 0, distance: Infinity }).index;
+    dotButtons.forEach((dot, current) => dot.classList.toggle("is-active", current === index));
+  };
+
+  const scrollToCard = (index) => cards[index]?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+  carousel.querySelector("[data-promo-prev]")?.addEventListener("click", () => {
+    const active = dotButtons.findIndex((dot) => dot.classList.contains("is-active"));
+    scrollToCard(Math.max(active - 1, 0));
+  });
+  carousel.querySelector("[data-promo-next]")?.addEventListener("click", () => {
+    const active = dotButtons.findIndex((dot) => dot.classList.contains("is-active"));
+    scrollToCard(Math.min(active + 1, cards.length - 1));
+  });
+  dotButtons.forEach((dot, index) => dot.addEventListener("click", () => scrollToCard(index)));
+  track.addEventListener("scroll", () => requestAnimationFrame(setActiveDot), { passive: true });
+  setActiveDot();
 }
