@@ -211,8 +211,8 @@ async function initPromotionsCarousel() {
     brand.textContent = promotion.brand;
     const title = document.createElement("h3");
     title.textContent = promotion.title;
-    const description = document.createElement("p");
-    description.textContent = promotion.description;
+    const description = promotion.description ? document.createElement("p") : null;
+    if (description) description.textContent = promotion.description;
     const date = document.createElement("p");
     date.className = "promotion-date";
     date.textContent = "Available through " + formatDate(promotion.endDate);
@@ -220,7 +220,9 @@ async function initPromotionsCarousel() {
     link.className = "button secondary";
     link.href = sitePath(promotion.link);
     link.textContent = "View Promotion";
-    copy.append(brand, title, description, date, link);
+    copy.append(brand, title);
+    if (description) copy.append(description);
+    copy.append(date, link);
     card.append(media, copy);
     track.append(card);
   });
