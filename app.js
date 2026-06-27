@@ -176,14 +176,7 @@ async function initPromotionsCarousel() {
     return;
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const activePromotions = promotions.filter((promotion) => {
-    if (!promotion.active) return false;
-    const starts = promotion.startDate ? new Date(promotion.startDate + "T00:00:00") : null;
-    const ends = promotion.endDate ? new Date(promotion.endDate + "T23:59:59") : null;
-    return (!starts || starts <= today) && (!ends || ends >= today);
-  });
+  const activePromotions = promotions.filter((promotion) => promotion.active);
 
   if (!activePromotions.length) {
     carousel.closest(".promotions-section")?.remove();
