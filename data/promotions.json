@@ -42,49 +42,5 @@
     "image": "/images/promotions/steel-elica-save-15.jpg",
     "link": "/promotions/steel-elica-buy-more-save-more-2026",
     "active": true
-  },
-  {
-    "id": "sub-zero-wolf-package",
-    "brand": "Sub-Zero & Wolf",
-    "title": "Complimentary upgrades on qualifying kitchen packages",
-    "description": "A refined manufacturer offer for select refrigeration and cooking packages planned through KWA.",
-    "startDate": "2026-06-01",
-    "endDate": "2026-08-31",
-    "image": "/images/brands/sub-zero-wolf-logo.png",
-    "link": "/promotions/sub-zero-wolf-package",
-    "active": true
-  },
-  {
-    "id": "thermador-kitchen-event",
-    "brand": "Thermador",
-    "title": "Kitchen package savings on select premium appliances",
-    "description": "Limited-time manufacturer savings on eligible cooking, refrigeration, and dish care selections.",
-    "startDate": "2026-06-15",
-    "endDate": "2026-09-30",
-    "image": "/images/brands/thermador-logo.png",
-    "link": "/promotions/thermador-kitchen-event",
-    "active": true
-  },
-  {
-    "id": "bosch-suite-offer",
-    "brand": "Bosch",
-    "title": "Seasonal savings on select Bosch kitchen suites",
-    "description": "A current manufacturer promotion for homeowners planning a coordinated appliance suite.",
-    "startDate": "2026-05-20",
-    "endDate": "2026-07-31",
-    "image": "/images/brands/bosch-logo.png",
-    "link": "/promotions/bosch-suite-offer",
-    "active": true
-  },
-  {
-    "id": "hestan-outdoor-living",
-    "brand": "Hestan",
-    "title": "Outdoor living incentives on select configurations",
-    "description": "Manufacturer support for qualifying premium outdoor cooking and entertaining packages.",
-    "startDate": "2026-06-01",
-    "endDate": "2026-08-15",
-    "image": "/images/brands/hestan-logo.png",
-    "link": "/promotions/hestan-outdoor-living",
-    "active": true
   }
 ]
