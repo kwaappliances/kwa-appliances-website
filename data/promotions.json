@@ -1,5 +1,16 @@
 [
   {
+    "id": "sub-zero-wolf-tax-covered-2026",
+    "brand": "Sub-Zero & Wolf",
+    "title": "Save the tax on all Sub-Zero and Wolf appliances and accessories",
+    "description": "Exclusive manufacturer offer: save the equivalent of the sales tax on all eligible Sub-Zero and Wolf appliances and accessories.",
+    "startDate": "2026-06-27",
+    "endDate": "2026-06-30",
+    "image": "/images/promotions/sub-zero-wolf-tax-covered.jpg",
+    "link": "/promotions/sub-zero-wolf-tax-covered-2026",
+    "active": true
+  },
+  {
     "id": "sub-zero-wolf-package",
     "brand": "Sub-Zero & Wolf",
     "title": "Complimentary upgrades on qualifying kitchen packages",
