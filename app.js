@@ -121,9 +121,7 @@ async function initProduct() {
   document.title = p.productName + " | KWA Appliances";
   target.innerHTML =
     '<section class="detail-grid">' +
-      '<div class="product-media">' +
-        ((p.imageUrls && p.imageUrls.length ? p.imageUrls : [""]).map((url) => '<img src="' + esc(url) + '" alt="' + esc(p.productName) + '">').join("")) +
-      '</div>' +
+      productGallery(p) +
       '<article class="product-copy">' +
         '<p class="eyebrow">' + esc(p.brand) + ' · ' + esc(p.sku) + '</p>' +
         '<h1>' + esc(p.productName) + '</h1>' +
@@ -139,14 +137,43 @@ async function initProduct() {
     '</section>';
 }
 
+function productGallery(p) {
+  const images = (p.imageUrls || []).filter(Boolean);
+  if (!images.length) return '<div class="product-media empty-media"><span>No image available</span></div>';
+  const main = images[0];
+  const thumbs = images.length > 1 ? '<div class="product-thumbs">' + images.map((url, index) => '<img src="' + esc(url) + '" alt="' + esc(p.productName) + ' image ' + (index + 1) + '">').join("") + '</div>' : '';
+  return '<div class="product-media">' +
+    '<div class="product-main-image"><img src="' + esc(main) + '" alt="' + esc(p.productName) + '"></div>' +
+    thumbs +
+  '</div>';
+}
+
+function isPdfLink(link) {
+  return /\.pdf(?:$|[?#])/i.test(String(link || ""));
+}
+
+function documentLabel(link, index) {
+  const lower = String(link || "").toLowerCase();
+  if (lower.includes('/specs/')) return 'Spec Sheet';
+  if (lower.includes('/installation/')) return 'Installation Guide';
+  if (lower.includes('/manual/')) return 'Owner's Manual';
+  if (lower.includes('/dimensions/')) return 'Dimension Sheet';
+  if (lower.includes('/warranty/')) return 'Warranty Details';
+  if (lower.includes('/energy/')) return 'Energy Guide';
+  return 'Product Document ' + (index + 1);
+}
+
 function specs(p) {
   const rows = [["Width", p.dimensions && p.dimensions.width ? p.dimensions.width + " in." : ""], ["Height", p.dimensions && p.dimensions.height ? p.dimensions.height + " in." : ""], ["Depth", p.dimensions && p.dimensions.depth ? p.dimensions.depth + " in." : ""], ["Fuel Type", p.fuelType], ["Installation", p.installationType]].concat(Object.entries(p.specs || {})).filter((row) => row[1]);
   return '<div class="spec-table">' + rows.map((row) => '<div class="spec-row"><strong>' + esc(row[0]) + '</strong><span>' + esc(row[1]) + '</span></div>').join("") + '</div>';
 }
 
 function downloads(p) {
-  if (!p.pdfLinks || !p.pdfLinks.length) return "";
-  return '<div class="hero-actions">' + p.pdfLinks.map((link, index) => '<a class="button dark" href="' + esc(link) + '" target="_blank" rel="noreferrer">Download PDF ' + (index + 1) + '</a>').join("") + '</div>';
+  const pdfLinks = (p.pdfLinks || []).filter(isPdfLink);
+  if (!pdfLinks.length) return "";
+  return '<section class="product-documents" aria-label="Product documents"><h2>Product Documents</h2><div class="document-list">' +
+    pdfLinks.map((link, index) => '<a class="button dark" href="' + esc(link) + '" target="_blank" rel="noreferrer">' + esc(documentLabel(link, index)) + '</a>').join("") +
+    '</div></section>';
 }
 
 function initAdmin() {
