@@ -32,6 +32,47 @@ function initHomeNavigation() {
   });
 }
 
+let staticCatalogueCache = null;
+
+async function loadStaticCatalogue() {
+  if (staticCatalogueCache) return staticCatalogueCache;
+  const response = await fetch(sitePath('/data/products-static.json'), { cache: 'no-store' });
+  if (!response.ok) throw new Error('Static product data unavailable');
+  staticCatalogueCache = await response.json();
+  return staticCatalogueCache;
+}
+
+function staticFacets(products) {
+  const visible = products.filter((p) => p.visible !== false);
+  const unique = (field) => Array.from(new Set(visible.map((p) => p[field]).filter(Boolean))).sort();
+  return {
+    categories: Array.from(new Set(visible.map((p) => p.category).filter(Boolean))).sort(),
+    brands: unique('brand'),
+    finishes: unique('finish'),
+    fuelTypes: unique('fuelType'),
+    installationTypes: unique('installationType'),
+    widths: Array.from(new Set(visible.map((p) => p.dimensions && p.dimensions.width).filter(Boolean))).sort((a, b) => a - b)
+  };
+}
+
+function staticFilteredProducts(products, params) {
+  return products.filter((p) => {
+    const searchable = (p.sku + ' ' + p.brand + ' ' + p.productName + ' ' + p.category + ' ' + p.subcategory).toLowerCase();
+    const price = Number(p.salePrice || p.price || 0);
+    return p.visible !== false &&
+      (!params.get('brand') || p.brand === params.get('brand')) &&
+      (!params.get('category') || p.category === params.get('category')) &&
+      (!params.get('finish') || p.finish === params.get('finish')) &&
+      (!params.get('fuelType') || p.fuelType === params.get('fuelType')) &&
+      (!params.get('installationType') || p.installationType === params.get('installationType')) &&
+      (!params.get('panelReady') || String(p.panelReady) === params.get('panelReady')) &&
+      (!params.get('width') || Number((p.dimensions || {}).width || 0) === Number(params.get('width'))) &&
+      (!params.get('minPrice') || price >= Number(params.get('minPrice'))) &&
+      (!params.get('maxPrice') || price <= Number(params.get('maxPrice'))) &&
+      (!params.get('q') || searchable.includes(String(params.get('q')).toLowerCase()));
+  });
+}
+
 async function initCatalogue() {
   const params = new URLSearchParams(location.search);
   fields.forEach((id) => {
@@ -51,10 +92,18 @@ async function initCatalogue() {
 }
 
 async function loadProducts(params) {
-  const response = await fetch("/api/products?" + params.toString());
-  const payload = await response.json();
-  populateFilters(payload.facets);
-  renderProducts(payload.products);
+  try {
+    const response = await fetch("/api/products?" + params.toString());
+    if (!response.ok) throw new Error("API unavailable");
+    const payload = await response.json();
+    populateFilters(payload.facets);
+    renderProducts(payload.products);
+  } catch (error) {
+    const payload = await loadStaticCatalogue();
+    const products = staticFilteredProducts(payload.products || [], params);
+    populateFilters(payload.facets || staticFacets(payload.products || []));
+    renderProducts(products);
+  }
 }
 
 function populateFilters(facets) {
@@ -111,13 +160,24 @@ async function initProduct() {
     target.textContent = "Missing product SKU.";
     return;
   }
-  const response = await fetch("/api/products/" + encodeURIComponent(sku));
-  if (!response.ok) {
+  let p = null;
+  try {
+    const response = await fetch("/api/products/" + encodeURIComponent(sku));
+    if (response.ok) {
+      const data = await response.json();
+      p = data.product;
+    }
+  } catch (error) {}
+  if (!p) {
+    try {
+      const payload = await loadStaticCatalogue();
+      p = (payload.products || []).find((product) => String(product.sku).toUpperCase() === String(sku).toUpperCase());
+    } catch (error) {}
+  }
+  if (!p) {
     target.textContent = "Product not found.";
     return;
   }
-  const data = await response.json();
-  const p = data.product;
   document.title = p.productName + " | KWA Appliances";
   target.innerHTML =
     '<section class="detail-grid">' +
