@@ -156,7 +156,7 @@ function documentLabel(link, index) {
   const lower = String(link || "").toLowerCase();
   if (lower.includes('/specs/')) return 'Spec Sheet';
   if (lower.includes('/installation/')) return 'Installation Guide';
-  if (lower.includes('/manual/')) return 'Owner's Manual';
+  if (lower.includes('/manual/')) return "Owner's Manual";
   if (lower.includes('/dimensions/')) return 'Dimension Sheet';
   if (lower.includes('/warranty/')) return 'Warranty Details';
   if (lower.includes('/energy/')) return 'Energy Guide';
