@@ -699,7 +699,8 @@ input, select { background: #fbfaf7; border: 1px solid var(--line); border-radiu
   display: flex;
   justify-content: center;
   min-height: 360px;
-  padding: 28px;
+  padding: 28px 64px;
+  position: relative;
 }
 .product-main-image img {
   display: block;
@@ -712,15 +713,45 @@ input, select { background: #fbfaf7; border: 1px solid var(--line); border-radiu
   gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
 }
-.product-thumbs img {
+.thumb-button {
+  background: transparent;
+  border: 1px solid var(--line);
+  min-height: 0;
+  padding: 0;
+}
+.thumb-button.is-active {
+  border-color: var(--brass);
+  box-shadow: 0 0 0 2px rgba(167, 122, 63, 0.18);
+}
+.thumb-button img {
   aspect-ratio: 1;
   background: #f7f4ed;
-  border: 1px solid var(--line);
   display: block;
   object-fit: contain;
   padding: 8px;
   width: 100%;
 }
+.gallery-arrow {
+  background: rgba(17, 17, 17, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: var(--white);
+  font-size: 2rem;
+  height: 46px;
+  min-height: 46px;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  z-index: 2;
+}
+.gallery-arrow:hover {
+  background: var(--brass);
+  transform: translateY(-50%);
+}
+.gallery-prev { left: 14px; }
+.gallery-next { right: 14px; }
 .empty-media {
   align-items: center;
   background: #f7f4ed;
@@ -815,8 +846,9 @@ input, select { background: #fbfaf7; border: 1px solid var(--line); border-radiu
   .about-copy { padding: 54px 5vw; }
   .about-media { min-height: 420px; }
   .price-row { grid-template-columns: 1fr; }
-  .product-main-image { min-height: 280px; padding: 18px; }
+  .product-main-image { min-height: 280px; padding: 18px 54px; }
   .product-main-image img { max-height: 320px; }
+  .gallery-arrow { height: 40px; min-height: 40px; width: 40px; }
   .section-shell, .audience-section, .brand-section, .process-luxury, .learning-preview, .about-story, .editorial-band, .final-cta { padding-left: 5vw; padding-right: 5vw; }
 }
 @media (max-width: 520px) {

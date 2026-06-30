@@ -135,17 +135,42 @@ async function initProduct() {
         specs(p) + downloads(p) +
       '</article>' +
     '</section>';
+  initProductGallery(target);
 }
 
 function productGallery(p) {
   const images = (p.imageUrls || []).filter(Boolean);
   if (!images.length) return '<div class="product-media empty-media"><span>No image available</span></div>';
-  const main = images[0];
-  const thumbs = images.length > 1 ? '<div class="product-thumbs">' + images.map((url, index) => '<img src="' + esc(url) + '" alt="' + esc(p.productName) + ' image ' + (index + 1) + '">').join("") + '</div>' : '';
-  return '<div class="product-media">' +
-    '<div class="product-main-image"><img src="' + esc(main) + '" alt="' + esc(p.productName) + '"></div>' +
+  const controls = images.length > 1 ?
+    '<button class="gallery-arrow gallery-prev" type="button" aria-label="Previous product image" data-gallery-prev>&lsaquo;</button>' +
+    '<button class="gallery-arrow gallery-next" type="button" aria-label="Next product image" data-gallery-next>&rsaquo;</button>' : '';
+  const thumbs = images.length > 1 ? '<div class="product-thumbs" role="list" aria-label="Product image thumbnails">' + images.map((url, index) =>
+    '<button class="thumb-button' + (index === 0 ? ' is-active' : '') + '" type="button" role="listitem" aria-label="Show product image ' + (index + 1) + '" data-gallery-thumb="' + index + '">' +
+      '<img src="' + esc(url) + '" alt="' + esc(p.productName) + ' image ' + (index + 1) + '">' +
+    '</button>').join("") + '</div>' : '';
+  return '<div class="product-media" data-product-gallery data-gallery-index="0">' +
+    '<div class="product-main-image">' + controls + '<img data-gallery-main src="' + esc(images[0]) + '" alt="' + esc(p.productName) + '"></div>' +
     thumbs +
   '</div>';
+}
+
+function initProductGallery(scope) {
+  const gallery = scope.querySelector('[data-product-gallery]');
+  if (!gallery) return;
+  const main = gallery.querySelector('[data-gallery-main]');
+  const thumbs = Array.from(gallery.querySelectorAll('[data-gallery-thumb]'));
+  if (!main || !thumbs.length) return;
+  const images = thumbs.map((button) => button.querySelector('img')?.getAttribute('src')).filter(Boolean);
+  const showImage = (nextIndex) => {
+    const index = (nextIndex + images.length) % images.length;
+    gallery.dataset.galleryIndex = String(index);
+    main.src = images[index];
+    main.alt = thumbs[index].querySelector('img')?.alt || main.alt;
+    thumbs.forEach((button, current) => button.classList.toggle('is-active', current === index));
+  };
+  thumbs.forEach((button, index) => button.addEventListener('click', () => showImage(index)));
+  gallery.querySelector('[data-gallery-prev]')?.addEventListener('click', () => showImage(Number(gallery.dataset.galleryIndex || 0) - 1));
+  gallery.querySelector('[data-gallery-next]')?.addEventListener('click', () => showImage(Number(gallery.dataset.galleryIndex || 0) + 1));
 }
 
 function isPdfLink(link) {
