@@ -137,7 +137,7 @@ function renderProducts(products) {
     return;
   }
   grid.innerHTML = products.map((p) =>
-    '<a class="product-card" href="' + sitePath('/product.html?sku=' + encodeURIComponent(p.sku)) + '">' +
+    '<a class="product-card" href="product.html?sku=' + encodeURIComponent(p.sku) + '">' +
       '<img src="' + esc((p.imageUrls || [])[0] || "") + '" alt="' + esc(p.productName) + '">' +
       '<div class="product-card-body">' +
         '<div class="meta">' + esc(p.brand) + ' · ' + esc(p.category) + '</div>' +
