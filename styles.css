@@ -689,7 +689,8 @@ input, select { background: #fbfaf7; border: 1px solid var(--line); border-radiu
   display: block;
   height: auto;
   object-fit: contain;
-  padding: 18px;
+  object-position: center 58%;
+  padding: 24px 18px 12px;
   width: 100%;
 }
 .product-main-image {
@@ -704,8 +705,9 @@ input, select { background: #fbfaf7; border: 1px solid var(--line); border-radiu
 }
 .product-main-image img {
   display: block;
-  max-height: 430px;
+  max-height: 410px;
   object-fit: contain;
+  transform: translateY(14px);
   width: 100%;
 }
 .product-thumbs {
@@ -847,7 +849,7 @@ input, select { background: #fbfaf7; border: 1px solid var(--line); border-radiu
   .about-media { min-height: 420px; }
   .price-row { grid-template-columns: 1fr; }
   .product-main-image { min-height: 280px; padding: 18px 54px; }
-  .product-main-image img { max-height: 320px; }
+  .product-main-image img { max-height: 300px; transform: translateY(10px); }
   .gallery-arrow { height: 40px; min-height: 40px; width: 40px; }
   .section-shell, .audience-section, .brand-section, .process-luxury, .learning-preview, .about-story, .editorial-band, .final-cta { padding-left: 5vw; padding-right: 5vw; }
 }
