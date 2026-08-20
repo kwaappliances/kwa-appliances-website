@@ -151,7 +151,7 @@ p { margin: 0; }
   line-height: 1.14;
   max-width: 1100px;
 }
-.section-shell, .audience-section, .brand-section, .process-luxury, .learning-preview, .about-story, .editorial-band, .final-cta {
+.section-shell, .audience-section, .brand-section, .process-luxury, .learning-preview, .about-story, .editorial-band, .visualizer-preview, .final-cta {
   padding: 86px 5vw;
 }
 .section-heading {
@@ -168,7 +168,7 @@ p { margin: 0; }
   max-width: 920px;
   text-align: center;
 }
-.section-heading p:not(.eyebrow), .section-shell p, .audience-grid p, .timeline-list p, .article-grid p, .editorial-band p, .about-copy p, .final-cta p {
+.section-heading p:not(.eyebrow), .section-shell p, .audience-grid p, .timeline-list p, .article-grid p, .editorial-band p, .visualizer-preview p, .about-copy p, .final-cta p {
   color: var(--muted);
 }
 
@@ -260,6 +260,50 @@ p { margin: 0; }
 .learning-preview { background: var(--warm-white); }
 .article-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
+.visualizer-preview {
+  align-items: center;
+  background: var(--white);
+  display: grid;
+  gap: 32px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.visualizer-preview p:not(.eyebrow) { max-width: 720px; margin-top: 18px; }
+.visualizer-shell { padding: 56px 5vw 80px; }
+.visualizer-heading h1 {
+  font-size: clamp(2.7rem, 6vw, 5.6rem);
+}
+.visualizer-frame-section {
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  min-height: 760px;
+  padding: 12px;
+}
+.visualizer-frame-toolbar {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  margin: -12px -12px 12px;
+  padding: 14px 16px;
+}
+.visualizer-frame-toolbar span {
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.visualizer-frame-toolbar .text-link {
+  margin-top: 0;
+}
+.visualizer-frame {
+  border: 0;
+  display: block;
+  min-height: 740px;
+  width: 100%;
+}
+
 .about-story {
   align-items: stretch;
   background: var(--white);
@@ -344,7 +388,7 @@ input, select { background: #fbfaf7; border: 1px solid var(--line); border-radiu
   .luxury-nav { align-items: flex-start; flex-direction: column; gap: 14px; padding-bottom: 16px; padding-top: 16px; }
   .nav-cta { display: none; }
   .feature-grid.four-up, .brand-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .catalogue-layout, .detail-grid, .catalogue-band { grid-template-columns: 1fr; }
+  .catalogue-layout, .detail-grid, .catalogue-band, .visualizer-preview { grid-template-columns: 1fr; }
   .filters { position: static; }
   .product-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
@@ -355,12 +399,14 @@ input, select { background: #fbfaf7; border: 1px solid var(--line); border-radiu
   nav a { min-width: 0; }
   .luxury-hero { background-position: 58% center; min-height: calc(100vh - 170px); padding: 56px 5vw; }
   .hero-panel { max-width: 100%; min-width: 0; }
-  .section-heading, .audience-grid, .article-grid, .about-story, .editorial-band, .timeline-list li { grid-template-columns: 1fr; }
+  .section-heading, .audience-grid, .article-grid, .about-story, .editorial-band, .visualizer-preview, .timeline-list li { grid-template-columns: 1fr; }
   .feature-grid.four-up, .brand-grid, .category-grid, .product-grid { grid-template-columns: 1fr; }
   .about-copy { padding: 54px 5vw; }
   .about-media { min-height: 420px; }
   .price-row { grid-template-columns: 1fr; }
-  .section-shell, .audience-section, .brand-section, .process-luxury, .learning-preview, .about-story, .editorial-band, .final-cta { padding-left: 5vw; padding-right: 5vw; }
+  .section-shell, .audience-section, .brand-section, .process-luxury, .learning-preview, .about-story, .editorial-band, .visualizer-preview, .final-cta { padding-left: 5vw; padding-right: 5vw; }
+  .visualizer-frame-section { min-height: 680px; padding: 8px; }
+  .visualizer-frame { min-height: 660px; }
 }
 @media (max-width: 520px) {
   h1 { font-size: clamp(3rem, 9vw, 6.5rem); line-height: 0.95; max-width: 100%; }
