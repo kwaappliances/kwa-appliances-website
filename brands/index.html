@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore the premium appliance brands and catalogue brands available through KWA Appliances.">
+    <title>Brands | KWA Appliances</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      .brands-shell { background: var(--warm-white); padding-top: 104px; }
+      .brands-hero { background: linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.46)), url("../images/kwa-guidance-kitchen.png") center/cover; color: var(--white); min-height: 70vh; padding: 132px 5vw 86px; }
+      .brands-hero h1 { max-width: 760px; }
+      .brands-hero p:not(.eyebrow) { color: rgba(255, 255, 255, 0.74); font-size: clamp(1rem, 1.35vw, 1.2rem); margin-top: 24px; max-width: 760px; }
+      .brands-hero .secondary { color: var(--white); }
+      .featured-brand-directory { padding-top: 92px; }
+      .brand-directory-section { background: var(--black); color: var(--white); padding: 96px 5vw 112px; }
+      .brand-directory-heading { align-items: end; display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr) auto; margin-bottom: 42px; }
+      .brand-directory-heading h2 { max-width: 880px; }
+      .brand-directory-heading > p { border: 1px solid rgba(217, 187, 130, 0.34); color: #d9bb82; font-size: 0.9rem; font-weight: 900; padding: 12px 16px; white-space: nowrap; }
+      .brand-directory-grid { display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .brand-directory-card { background: #171717; border: 1px solid rgba(255, 255, 255, 0.12); display: grid; gap: 12px; min-height: 168px; padding: 24px; transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
+      .brand-directory-card:hover { border-color: rgba(217, 187, 130, 0.62); box-shadow: 0 22px 58px rgba(0, 0, 0, 0.34); transform: translateY(-3px); }
+      .brand-directory-card span { font-family: Georgia, "Times New Roman", serif; font-size: 1.45rem; line-height: 1.05; }
+      .brand-directory-card strong { color: #d9bb82; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; }
+      .brand-directory-card small { align-self: end; color: rgba(255, 255, 255, 0.62); font-size: 0.86rem; line-height: 1.45; }
+      .brands-page .brand-section .section-heading.centered:last-child { margin-bottom: 0; margin-top: 34px; }
+      @media (max-width: 1100px) { .brand-directory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 820px) { .brand-directory-heading, .brand-directory-grid { grid-template-columns: 1fr; } .brand-directory-heading > p { white-space: normal; } }
+    </style>
+    <script defer src="../app.js"></script>
+  </head>
+  <body class="brands-page">
+    <header class="site-header luxury-nav">
+      <a class="brand-mark brand-logo" href="../" aria-label="KWA Appliances home"><img src="../images/kwa-logo-header.png" alt="KWA Appliances"></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-nav" aria-label="Main navigation">
+        <a href="./" aria-current="page">Brands</a>
+        <a href="../builders">Builders</a>
+        <a href="../designers">Designers</a>
+        <a href="../projects">Projects</a>
+        <a href="../catalogue.html">Catalogue</a>
+        <a href="../appliance-visualizer.html">Appliance Visualizer</a>
+        <a href="../learning-centre">Learning Centre</a>
+        <a href="../contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="../contact">Book a Consultation</a>
+    </header>
+
+    <main class="brands-shell">
+      <section class="brands-hero" aria-labelledby="brands-title">
+        <p class="eyebrow">Brand directory</p>
+        <h1 id="brands-title">The appliance brands behind better kitchens.</h1>
+        <p>KWA works across premium cooking, refrigeration, ventilation, dish care, outdoor, laundry, and specialty appliance categories. Start with a brand, then narrow the catalogue by product type, dimensions, finish, and installation details.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="../catalogue.html">Explore Catalogue</a>
+          <a class="button secondary" href="../contact">Speak With KWA</a>
+        </div>
+      </section>
+
+      <section class="brand-section featured-brand-directory" aria-labelledby="featured-brand-title">
+        <div class="section-heading centered">
+          <p class="eyebrow">Featured premium partners</p>
+          <h2 id="featured-brand-title">Specified with care. Selected with context.</h2>
+        </div>
+        <div class="brand-grid logo-grid" aria-label="Featured premium appliance brands">
+          <a class="brand-logo-card brand-bosch" href="../catalogue.html?brand=Bosch" aria-label="View Bosch products"><img src="../images/brands/bosch-logo.png" alt="Bosch logo"></a>
+          <a class="brand-logo-card brand-hestan" href="../contact" aria-label="Ask KWA about Hestan"><img src="../images/brands/hestan-logo.png" alt="Hestan logo"></a>
+          <a class="brand-logo-card brand-kitchenaid" href="../catalogue.html?brand=KitchenAid" aria-label="View KitchenAid products"><img src="../images/brands/kitchenaid-logo.png" alt="KitchenAid logo"></a>
+          <a class="brand-logo-card brand-steel-cucine" href="../contact" aria-label="Ask KWA about Steel Cucine"><img src="../images/brands/steel-logo.png" alt="Steel Cucine logo"></a>
+          <a class="brand-logo-card brand-sub-zero-wolf" href="../catalogue.html?brand=Sub-Zero" aria-label="View Sub-Zero products"><img src="../images/brands/sub-zero-wolf-logo.png" alt="Sub-Zero and Wolf logo"></a>
+          <a class="brand-logo-card brand-thermador" href="../catalogue.html?brand=Thermador" aria-label="View Thermador products"><img src="../images/brands/thermador-logo.png" alt="Thermador logo"></a>
+          <a class="brand-logo-card brand-elica" href="../contact" aria-label="Ask KWA about Elica"><img src="../images/brands/elica-logo.png" alt="Elica logo"></a>
+          <a class="brand-logo-card brand-true-caliber" href="../contact" aria-label="Ask KWA about True and Caliber"><img src="../images/brands/true-caliber-logo.png" alt="True and Caliber logo"></a>
+        </div>
+      </section>
+
+      <section class="brand-directory-section" aria-labelledby="all-brand-title">
+        <div class="brand-directory-heading">
+          <div>
+            <p class="eyebrow">All catalogue brands</p>
+            <h2 id="all-brand-title">Browse every brand currently represented in the website catalogue.</h2>
+          </div>
+          <p id="brandDirectoryCount">Loading brands...</p>
+        </div>
+        <div class="brand-directory-grid" id="brandDirectory" aria-live="polite">
+          <p class="meta">Loading brand directory...</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const grid = document.getElementById("brandDirectory");
+        const count = document.getElementById("brandDirectoryCount");
+        const esc = (value) => String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        try {
+          const response = await fetch("../data/products-static.json", { cache: "no-store" });
+          if (!response.ok) throw new Error("Catalogue data unavailable");
+          const payload = await response.json();
+          const products = (payload.products || []).filter((product) => product.visible !== false);
+          const brandMap = products.reduce((map, product) => {
+            if (!product.brand) return map;
+            if (!map.has(product.brand)) map.set(product.brand, { count: 0, categories: new Set() });
+            const entry = map.get(product.brand);
+            entry.count += 1;
+            if (product.category) entry.categories.add(product.category);
+            return map;
+          }, new Map());
+          const brands = ((payload.facets && payload.facets.brands) || Array.from(brandMap.keys())).slice().sort((a, b) => a.localeCompare(b));
+          count.textContent = brands.length + " catalogue brand" + (brands.length === 1 ? "" : "s") + " available";
+          grid.innerHTML = brands.map((brand) => {
+            const entry = brandMap.get(brand) || { count: 0, categories: new Set() };
+            const categories = Array.from(entry.categories).sort((a, b) => a.localeCompare(b)).slice(0, 3);
+            return '<a class="brand-directory-card" href="../catalogue.html?brand=' + encodeURIComponent(brand) + '"><span>' + esc(brand) + '</span><strong>' + entry.count + ' product' + (entry.count === 1 ? '' : 's') + '</strong><small>' + esc(categories.join(' / ') || 'Catalogue products') + '</small></a>';
+          }).join("");
+        } catch (error) {
+          count.textContent = "Brand directory unavailable";
+          grid.innerHTML = '<p class="meta">The brand directory could not be loaded. Please open the catalogue or contact KWA for help with a specific brand.</p>';
+        }
+      });
+    </script>
+  </body>
+</html>
