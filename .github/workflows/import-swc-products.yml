@@ -1,0 +1,79 @@
+name: Import SWC catalogue
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import-swc-products.yml"
+      - "scripts/import-swc-products.mjs"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: source
+
+      - name: Checkout GitHub Pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: site
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Import SWC products
+        working-directory: site
+        run: |
+          node ../source/scripts/import-swc-products.mjs --write --market=ca-en --record-mode=options --status=Active --application=KWA-Appliances-Website --static-file=../site/data/products-static.json --source-file=../site/data/products.json --report=../site/data/swc-import-report.json
+
+      - name: Verify no duplicate SKUs
+        working-directory: site
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('data/products-static.json', 'utf8'));
+          const products = Array.isArray(data.products) ? data.products : [];
+          const counts = new Map();
+          for (const product of products) {
+            const key = String(product.sku || '').trim().toUpperCase();
+            if (!key) throw new Error(`Missing SKU for ${product.brand || 'Unknown'} ${product.productName || 'Unnamed product'}`);
+            counts.set(key, (counts.get(key) || 0) + 1);
+          }
+          const duplicates = [...counts.entries()].filter(([, count]) => count > 1);
+          if (duplicates.length) {
+            console.error('Duplicate SKUs found:');
+            console.error(JSON.stringify(duplicates.slice(0, 50), null, 2));
+            process.exit(1);
+          }
+          const byBrand = products.reduce((acc, product) => {
+            acc[product.brand] = (acc[product.brand] || 0) + 1;
+            return acc;
+          }, {});
+          console.log('No duplicate SKUs.');
+          console.log(JSON.stringify({
+            total: products.length,
+            subZero: byBrand['Sub-Zero'] || 0,
+            wolf: byBrand.Wolf || 0,
+            cove: byBrand.Cove || 0
+          }, null, 2));
+          NODE
+
+      - name: Commit catalogue to GitHub Pages
+        working-directory: site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/products-static.json data/products.json data/swc-import-report.json
+          if git diff --cached --quiet; then
+            echo "No catalogue changes to commit."
+          else
+            git commit -m "Import Sub-Zero Wolf Cove catalogue"
+            git push origin gh-pages
+          fi
