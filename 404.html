@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Not Found | KWA Appliances</title>
+    <script>
+      (function () {
+        var parts = location.pathname.split('/').filter(Boolean);
+        var base = parts[0] === 'kwa-appliances-website' ? '/kwa-appliances-website/' : '/';
+        var brandIndex = parts.indexOf('brands');
+        var slug = brandIndex >= 0 ? parts[brandIndex + 1] : '';
+        var brandTargets = {
+          'bosch': 'catalogue.html?brand=Bosch',
+          'kitchenaid': 'catalogue.html?brand=KitchenAid',
+          'thermador': 'catalogue.html?brand=Thermador',
+          'sub-zero-wolf': 'catalogue.html?brand=Sub-Zero'
+        };
+        if (brandIndex >= 0) {
+          location.replace(base + (brandTargets[slug] || 'brands/'));
+        }
+      }());
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="final-cta luxury-final" style="min-height:100vh;justify-content:center;">
+      <p class="eyebrow">KWA Appliances</p>
+      <h1>Page not found.</h1>
+      <p>The page you are looking for is not available.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="index.html">Homepage</a>
+        <a class="button secondary" href="brands/">Brands</a>
+        <a class="button secondary" href="catalogue.html">Catalogue</a>
+      </div>
+    </main>
+  </body>
+</html>
