@@ -1,0 +1,31 @@
+{
+  "importedAt": "2026-08-24T19:57:07.521Z",
+  "market": "ca-en",
+  "baseUrl": "https://ca.subzero-wolf.com/en/webapi",
+  "statusFilter": [
+    "Active"
+  ],
+  "recordMode": "options",
+  "rawProductModels": 473,
+  "importedRecords": 454,
+  "totalCatalogueRecordsAfterMerge": 1124,
+  "byBrand": {
+    "Sub-Zero": {
+      "records": 233,
+      "withImages": 233,
+      "withDocuments": 233
+    },
+    "Wolf": {
+      "records": 217,
+      "withImages": 217,
+      "withDocuments": 217
+    },
+    "Cove": {
+      "records": 4,
+      "withImages": 4,
+      "withDocuments": 4
+    }
+  },
+  "missingImages": [],
+  "missingDocuments": []
+}
