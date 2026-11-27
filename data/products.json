@@ -104,5 +104,106 @@
       "builderPrice": 1875
     },
     "updatedAt": "2026-06-25T00:00:00.000Z"
+  },
+  {
+    "sku": "EE36M2DWRLP",
+    "brand": "Crown Verity",
+    "productName": "36-Inch Estate Elite Cart Grill",
+    "category": "Outdoor",
+    "subcategory": "Gas Grills",
+    "description": "A freestanding propane grill with a 34 × 21-inch cooking surface and an enclosed stainless-steel cart with two drawers and one cabinet door.",
+    "specs": {
+      "Cooking surface": "34 × 21 in.",
+      "Main burners": "5",
+      "Storage": "Two drawers and one cabinet door"
+    },
+    "dimensions": {
+      "width": 64.75,
+      "height": 56.5,
+      "depth": 26.25
+    },
+    "finish": "Stainless Steel",
+    "fuelType": "Liquid Propane",
+    "installationType": "Freestanding",
+    "panelReady": false,
+    "price": null,
+    "salePrice": null,
+    "requestPricing": true,
+    "visible": true,
+    "imageUrls": [],
+    "pdfLinks": [
+      "https://assets.ctfassets.net/xf3hiu092ogp/1DyCyJZXIZVZegYL9aETPg/7515641750e6303184dc1acb66c369f6/ProductGuide_2018_PROD_Full.pdf"
+    ],
+    "internal": {
+      "builderPrice": null
+    },
+    "updatedAt": "2026-11-27T22:39:02.333Z"
+  },
+  {
+    "sku": "IBI36LP",
+    "brand": "Crown Verity",
+    "productName": "36-Inch Infinite Series Built-In Grill",
+    "category": "Outdoor",
+    "subcategory": "Gas Grills",
+    "description": "A built-in propane grill for outdoor cabinetry, with five burners and a 34 × 21-inch cooking grate. Includes a bun rack and fitted cover.",
+    "specs": {
+      "Cooking surface": "34 × 21 in.",
+      "Main burners": "5",
+      "Cabinet cutout": "39 W × 13 H × 23 D in."
+    },
+    "dimensions": {
+      "width": 41.34,
+      "height": 32.22,
+      "depth": 24.693
+    },
+    "finish": "Stainless Steel",
+    "fuelType": "Liquid Propane",
+    "installationType": "Built-In",
+    "panelReady": false,
+    "price": null,
+    "salePrice": null,
+    "requestPricing": true,
+    "visible": true,
+    "imageUrls": [],
+    "pdfLinks": [
+      "https://cms.crownverity.ca/assets/documents/CV_SpecSheet_IBIs_May2025.pdf"
+    ],
+    "internal": {
+      "builderPrice": null
+    },
+    "updatedAt": "2026-11-27T22:39:02.333Z"
+  },
+  {
+    "sku": "IGM36LP",
+    "brand": "Crown Verity",
+    "productName": "36-Inch Infinite Series Modular Grill",
+    "category": "Outdoor",
+    "subcategory": "Gas Grills",
+    "description": "A propane grill module that pairs with Crown Verity’s Infinite Series outdoor cabinets. The five-burner grill includes a bun rack and propane regulator.",
+    "specs": {
+      "Cooking surface": "34 × 21 in.",
+      "Main burners": "5"
+    },
+    "dimensions": {
+      "width": 38.194,
+      "height": 54.826,
+      "depth": 24.915
+    },
+    "finish": "Stainless Steel",
+    "fuelType": "Liquid Propane",
+    "installationType": "Modular",
+    "panelReady": false,
+    "price": null,
+    "salePrice": null,
+    "requestPricing": true,
+    "visible": true,
+    "imageUrls": [],
+    "pdfLinks": [
+      "https://cms.crownverity.ca/assets/documents/CV_SpecSheet_IGM_May2025.pdf"
+    ],
+    "internal": {
+      "builderPrice": null
+    },
+    "updatedAt": "2026-11-27T22:39:02.333Z"
   }
 ]
